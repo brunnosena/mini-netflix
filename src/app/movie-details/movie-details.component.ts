@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MyMovieDateService } from '../services/my-movie-date.service';
-import { moviesModel } from '../model/IMovies';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MovieDetailsService } from './movie-details.service';
+import { SearchMoviesModel } from '../model/searchMovies';
+import { GeneralService } from '../services/general.service';
+import { StorageFacade } from '../core/persistence/storage.facade';
+import { MoviesModel } from '../model/movies';
 
 
 @Component({
@@ -12,26 +13,71 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit {
-  selectedMovie: moviesModel;
-  @Input('isActive') isActive: boolean;
-  moviesUrl="/assets/movies.json"
-  constructor(private route: ActivatedRoute, private movieservice: MyMovieDateService, private http: HttpClient) { }
+  public movie: SearchMoviesModel;
+  private id_movie: number;
 
-  ngOnInit() {
-    let id:number = parseInt(this.route.snapshot.params['id']);
-     this.movieservice.getMovieByID(id).subscribe((result) =>{
-      this.selectedMovie = result;
-      console.log(result);
-      (err:any)=>console.log(err)
-    })
-    //const id = +this.route.snapshot.params['id'];
-    //this.selectedMovie = this.movieservice.getMovieByID(id);
-    //console.log(this.selectedMovie)
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private storage: StorageFacade,
+    private _movieDetailsService: MovieDetailsService,
+    private _service: GeneralService
+  ) {
+    this.id_movie = this.route.snapshot.params['id'];
+    this.getDetail(this.id_movie);
+  }
+
+  ngOnInit() { }
+
+
+  public getDetail(id: number) {
+    this._movieDetailsService.getDetailsMovies(id)
+      .subscribe(
+        next => this.successPopularMovies(next),
+        err => this.errPopularMovies(err),
+      )
 
   }
 
-  onclick(){
-    this.isActive = !this.isActive;
+  private successPopularMovies(next: any) {
+    this.movie = null;
+    this.movie = next;
   }
+
+  public tratarImagemItem(event) {
+    event.onerror = null;
+    event.src = 'assets/images/not-found.jpeg';
+    return event;
+  }
+
+  private errPopularMovies(err: any) {
+    alert('error has occurred the try return movies');
+    this.router.navigate(['/']);
+  }
+
+  public goback() {
+    this.router.navigate(['/']);
+  }
+
+  public favorite(movie: SearchMoviesModel) {
+    this._service.favor(movie)
+    .subscribe(
+      next => this.tratarSucesso(next),
+      err => this.tratarErro(err)
+    )
+  }
+
+
+  private tratarSucesso(next: any): void {
+    console.log(next);
+    // this.router.navigate(['/']);
+  }
+
+  private tratarErro(err: any): void {
+    console.log(err)
+    // alert('Você não está logado, faça login, e tente novamente.')
+    // this.router.navigate(['login']);
+  }
+
 
 }

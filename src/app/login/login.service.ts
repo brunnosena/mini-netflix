@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { StorageFacade } from '../core/persistence/storage.facade';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginService {
 
   constructor(
-    private _httpClient: HttpClient
+    private _httpClient: HttpClient,
+    private storage: StorageFacade
   ) { }
 
 
-  public login(user: string, pass: string): Observable<any> {    
-    return this._httpClient.get<any[]>('api/user-users');
-    // .subscribe(todos => console.log(todos));
+  public login(user: string, pass: string): Observable<any> {
+    return this._httpClient.get<any[]>(`api/user-users?user=${user}&pass=${pass}`);
+  }
+
+
+  public deslogar() {
+    this.storage.usersStorage = null;
+    this.storage.favouritesStorage = null;
   }
 }

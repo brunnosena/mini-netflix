@@ -2,17 +2,28 @@ export class UsersFakeDb {
     public static users = [
         {
             'id': '15459251a6d6b397565',
-            'user': 'jack@email.com',
+            'user': 'e5f001',
             'pass': '123',
-            'name': 'Alice Freeman',
-            'avatar': 'assets/images/user1.png'
+            'name': 'Jack Smith',
+            'avatar': '/assets/images/user1.png'
         },
         {
             'id': '154588a0864d2881124',
-            'user': 'paul@email.com',
+            'user': 'ept001',
             'pass': '456',
             'name': 'Paul Ryan',
-            'avatar': 'assets/images/user2.png'
+            'avatar': '/assets/images/user2.png'
+        }
+    ];
+
+    public static favourites = [
+        {
+            'id': '15459251a6d6b397565',
+            'fav': []
+        },
+        {
+            'id': '154588a0864d2881124',
+            'fav': []
         }
     ];
 }

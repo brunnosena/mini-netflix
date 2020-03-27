@@ -16,11 +16,12 @@
       <li class="nav-item dropdown dropdown-menu-right pointer" *ngIf="user">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="avatar" src="{{user.image}}" width="32">
+          <img class="avatar" [src]="user.avatar" width="32">
           <span class="user">{{user.name}}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['/favoritemovies']">Favourites</a>
+          <a class="dropdown-item" (click)="logoff()">Sair</a>
         </div>
       </li>
     </ul>

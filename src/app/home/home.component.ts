@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MyMovieDateService } from '../services/my-movie-date.service';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HomeService } from './home.service';
+import { MoviesModel } from '../model/movies';
+
 
 @Component({
   selector: 'app-home',
@@ -11,48 +11,63 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  public allmovies: any[] ;
-  public filteredMovies: any[] ;
-  title;
-  moviesUrl="/assets/movies.json"
+  public movies: MoviesModel[];
 
-  constructor(private movieService: MyMovieDateService, private route: Router, private http: HttpClient) { }
+  constructor(
+    private _homeService: HomeService,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
-    this.movieService.getAllMovies().subscribe(res=>{
-      this.allmovies = res;
-      console.log(res);
-    })
-    //throw new Error("Method not implemented.");
+    this.getPopularMovies();
   }
 
-  onSelect(allmovie){
+  public getPopularMovies() {
+    this._homeService.getPopularMovies()
+      .subscribe(
+        next => this.successPopularMovies(next),
+        err => this.errPopularMovies(err),
+      )
+  }
+
+  public searchMovie(value: string) {
+    this._homeService.searchMovies(value)
+      .subscribe(
+        next => this.successPopularMovies(next),
+        err => this.errPopularMovies(err),
+      )
+  }
+
+  private successPopularMovies(next: any) {
+    if (next.results.length === this.movies) return false;
+
+    this.movies = [];
+    this.movies = next.results;
+  }
+
+
+  private errPopularMovies(err: any) {
+    alert('error has occurred the try return movies');
+  }
+
+  onSelect(allmovie) {
     this.route.navigate(['details', allmovie.id])
   }
 
+  public tratarImagemItem(event) {
+    event.onerror = null;
+    event.src = 'assets/images/not-found.jpeg';
+    return event;
+  }
 
-  filterTitles(){
-    if(this.title !=""){
-      this.allmovies = this.allmovies.filter(movies=>{
-        return movies.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
-      }
-       );
+
+  filterTitles(event: any) {
+    console.log(event.keyCode)
+    if (event.target.value.length >= 3) {
+      this.searchMovie(event.target.value);
+    } else if (event.target.value.length === 0) {
+      this.getPopularMovies();
     }
-    else{
-      this.ngOnInit()
-    }
-
-    }
-
-
-
+  }
 
 }
-
-
-// getMovieByTitle(title:string){
-//   return this.http.get(this.moviesUrl)
-//     .pipe(map(response => {
-//       return response.find((item) => (item.title === title));
-//     }))
-// }

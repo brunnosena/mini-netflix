@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
+import { StorageFacade } from '../core/persistence/storage.facade';
+
 
 @Component({
   selector: 'app-login',
@@ -9,24 +12,32 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+  public showError: boolean = false;
+  public showAlert: boolean = false;
   public loading: boolean = false;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private storage: StorageFacade
     ) { }
 
   ngOnInit() {
+    this._loginService.deslogar();
+
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      user: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
   public login(): void {
     this.loading = true;
+    this.showError = false;
+    this.showAlert = false;
 
-    const user = this.loginForm.get('email').value;
+    const user = this.loginForm.get('user').value;
     const pass = this.loginForm.get('password').value;
 
     this._loginService.login(user, pass)
@@ -38,11 +49,20 @@ export class LoginComponent implements OnInit {
 
 
   private tratarSucesso(next: any): void {
-    console.log(next)
+    if (next.length === 0) {
+      this.loading = false;
+      this.showAlert = true;
+      return;
+    }
+
+    this.storage.usersStorage = next.pop();
+    this.loading = false;
+    this.router.navigate(['/']);
   }
 
   private tratarErro(err: any): void {
-    console.log(err)
+    this.loading = false;
+    this.showError = true;
   }
 
   

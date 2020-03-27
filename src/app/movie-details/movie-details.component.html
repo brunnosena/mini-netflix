@@ -1,79 +1,71 @@
+<app-navbar></app-navbar>
 <div class="container mb-4">
   <div class="row">
     <div class="col-lg-12 col-md-12">
 
       <div class=" card" style="padding: 20px;  margin-top: 15px;">
-        <h3 style="text-align: center;">{{selectedMovie?.title}}</h3>
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+            <i class="fa fa-arrow-left pointer" (click)="goback()" style="font-size: 40px; color: #e02041"></i>          
+            <i style="font-size: 40px;" class="fa fa-star-o pull-right" [class.fa-star]="isActive"
+              [class.fa-star-o]="!isActive" (click)="favorite(movie)"></i>
+          </div>
+        </div>
+
+        <h4 style="text-align: center;">{{movie?.title}}</h4>
         <hr>
         <div class="row">
 
           <div class="col-md-5" style="padding: 2px 20px 2px 20px;">
             <div class="card" style="border: 0px;">
-              <img src="{{selectedMovie.image}}" alt="" *ngIf="selectedMovie" style="width: 100%; height: 450px;">
+              <img
+                src="{{movie?.poster_path ? 'https://image.tmdb.org/t/p/w500'+movie.poster_path : 'assets/images/not-found.jpeg'}}"
+                onerror="tratarImagemItem(this)" alt="movie.title" style="width: 100%; height: 450px;">
             </div>
           </div>
 
           <div class="col-md-6" style="padding: 20px 2px 2px 2px; border: 0px;">
             <div class="card" style="border: 0px;">
               <div class=" form-inline">
-                <p para>Director:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Director}}</p>
+                <p para>Tag Line:</p> &nbsp; &nbsp;
+                <p>{{movie?.tagline}}</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
                 <p para>Released:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Released}}</p>
+                <p>{{movie?.release_date}}</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
                 <p para>Country:</p> &nbsp; &nbsp;
                 <p>USA</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
-                <p para>Language:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Language}}</p>
+                <p para>Original Language:</p> &nbsp; &nbsp;
+                <p>{{movie?.original_language || '-' | uppercase}}</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
-                <p para>Writer:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Writer}}</p>
+                <p para>Budget:</p> &nbsp; &nbsp;
+                <p>{{movie?.budget.toFixed(2) || '-'}}</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
                 <p para>Genre:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Genre}}</p>
+                <p *ngFor="let item of movie?.genres;let isLast=last">{{item.name}}{{isLast ? '' : ', '}} </p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
                 <p para>Runtime:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Runtime}}</p>
+                <p>{{movie?.runtime || '-'}} minutes</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
-                <p para>Ratings:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Rated}}</p>
+                <p para>Production Companies:</p> &nbsp; &nbsp;
+                <p *ngFor="let item of movie?.production_companies;let isLast=last">
+                  {{item.name }}{{isLast ? ' ' : ',  '}} </p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
-                <p para>Awards:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Awards}}</p>
+                <p para>Vote Average:</p> &nbsp; &nbsp;
+                <p>{{movie?.vote_average ? movie.vote_average+'%' : '-'}}</p>
               </div>
               <div class="form-inline" style="margin-bottom: 0rem;">
-                <p para>Cast:</p> &nbsp; &nbsp;
-                <p>{{selectedMovie?.Actors}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="card" style="border: 0px; padding: 20px 3px 3px 14px;">
-              <div class="form-inline">
-                <span style="font-size: 35px; text-align: center;" class="fa fas fa-star-o" [class.fa-star]="isActive"
-                  [class.fa-star-o]="!isActive" (click)="onclick()">
-                  <p style="font-size: 20px;">Favourite</p>
-                </span>&nbsp; &nbsp; &nbsp; &nbsp;
-                <span style="font-size: 35px; text-align: center;" class="fa fa-thumbs-o-up">
-                  <p style="font-size: 20px;">Rate</p>
-                </span>&nbsp; &nbsp; &nbsp; &nbsp;
-                <span style="font-size: 35px; text-align: center;" class="fa fa-download">
-                  <p style="font-size: 20px;">Download</p>
-                </span>&nbsp; &nbsp; &nbsp; &nbsp;
-                <span style="font-size: 35px; text-align: center; font-weight: lighter;" class="fa fa-plus">
-                  <p style="font-size: 20px;">My List</p>
-                </span>
+                <p para>Sinopse:</p> &nbsp; &nbsp;
+                <p>{{movie?.overview || '-'}}</p>
               </div>
             </div>
           </div>

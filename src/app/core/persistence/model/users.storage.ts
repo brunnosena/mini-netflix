@@ -7,7 +7,7 @@ export class UsersStorage extends Serializable {
     public user?: string,
     public pass?: string,
     public name?: string,
-    public image?: string
+    public avatar?: string
   ) {
     super();
   }

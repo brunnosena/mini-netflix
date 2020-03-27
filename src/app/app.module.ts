@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { appRoutes } from './app.routing';
@@ -8,17 +10,18 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MyMovieDateService } from './services/my-movie-date.service';
+import { GeneralService } from './services/general.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotfoundComponent } from './not-found/not-found.component';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { HomeService } from './home/home.service';
 import { FavouriteMoviesComponent } from './favourite-movies/favourite-movies.component';
 import { SeriesComponent } from './series/series.component';
 import { FooterComponent } from './footer/footer.component';
 import { PersistenceService } from './core/persistence';
 import { StorageFacade } from './core/persistence/storage.facade';
 import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
+import { MovieDetailsService } from './movie-details/movie-details.service';
 
 
 
@@ -47,7 +50,10 @@ import { LoginComponent } from './login/login.component';
   }),
   ],
   providers: [
-    MyMovieDateService,
+    HomeService,
+    LoginService,
+    MovieDetailsService,
+    GeneralService,
     PersistenceService,
     StorageFacade
   ],

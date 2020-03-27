@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { UsersFakeDb } from '../fake-db/users';
+import { UsersFakeDb } from 'src/app/core/fake-db/users';
 
 
 export class FakeDbService implements InMemoryDbService
@@ -9,7 +9,8 @@ export class FakeDbService implements InMemoryDbService
     {
         return {
             // user
-            'user-users'  : UsersFakeDb.users
+            'user-users'  : UsersFakeDb.users,
+            'user-favourites'  : UsersFakeDb.favourites
         };
     }
 }
