@@ -1,0 +1,23 @@
+[netflix] {
+  color: rgba(238, 6, 6, 0.932);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav {
+  margin-bottom: 10px;
+}
+
+.nav-item {
+  display: inline;
+}
+
+.navbar {
+  background-color: #141414 !important;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}

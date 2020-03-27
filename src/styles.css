@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #141414 url(/assets/images/bg2.jpg) no-repeat fixed center;
+}
+
+.text-red {
+    color: #E74021;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+input, button {
+    border-radius: 0 !important;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;    
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;    
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+}

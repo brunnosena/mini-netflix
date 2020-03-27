@@ -1,0 +1,10 @@
+.container {
+    padding: 100px 20px;
+
+}
+
+.card {
+    padding: 20px;
+    /* margin-top: 15px; */
+    border-radius: 0;
+}

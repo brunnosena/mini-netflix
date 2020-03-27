@@ -1,0 +1,26 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12 mt-5">
+      <input class="myTitle form-control form-control-lg" #myTitle [(ngModel)]="title" (input)="filterTitles()"
+        type="text" placeholder="Search by Title" aria-label="Search">
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-3 col-xs-1 mt-5" *ngFor="let allmovie of allmovies"
+      (click)="onSelect(allmovie)">
+      <div class="card-movie pointer">
+        <img src="{{allmovie.image}}" alt="Captain Marvel">
+        <div class="infor">
+          <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+          <p class="descricao">{{allmovie.title}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div> <!--   ennds container-fluid -->

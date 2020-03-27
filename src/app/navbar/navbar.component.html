@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/']">
+    <img src="/assets/images/icon2.png" width="128" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item " *ngIf="!user">
+        <a class="nav-link" [routerLink]="['/login']">Fazer login <span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item dropdown dropdown-menu-right pointer" *ngIf="user">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img class="avatar" src="{{user.image}}" width="32">
+          <span class="user">{{user.name}}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/favoritemovies']">Favourites</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
