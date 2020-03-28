@@ -75,7 +75,7 @@ export class MovieDetailsComponent implements OnInit {
 
   private tratarErro(err: any): void {
     console.log(err)
-    // alert('Você não está logado, faça login, e tente novamente.')
+    alert('Você não está logado, faça login, e tente novamente.')
     // this.router.navigate(['login']);
   }
 

@@ -20,16 +20,20 @@ export class GeneralService {
     }
 
 
-    public favor(movie: SearchMoviesModel) {
-      const user: UsersStorage = this.storage.usersStorage;
-      // if (user === null) {
-      //   return throwError("invalid ID");
-      // }
+    favor(movie) {
+      const user: UsersStorage = this.storage.usersStorage || null;
+      if (user === null) {
+        return throwError('invalid ID');
+      }     
       
-      const body = JSON.stringify({fav: movie.id});
+      const body = JSON.stringify({
+        id: user.id.toString(),
+        fav: movie.id
+      });
+    
 
 
-      return this._httpClient.post<any>('api/user-favourites/' + user.id, {...[body]});
+      return this._httpClient.post<any>('api/user-favourites/' + user.id.toString(), body);
     }
 
 

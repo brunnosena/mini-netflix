@@ -18,12 +18,14 @@ export class UsersFakeDb {
 
     public static favourites = [
         {
+
             'id': '15459251a6d6b397565',
-            'fav': []
-        },
-        {
-            'id': '154588a0864d2881124',
-            'fav': []
+            "Name": "Test",
+            "Latitude": 12.59817,
+            "Longitude": 52.12873
         }
+        // {
+        //     'id': '154588a0864d2881124'
+        // }
     ];
 }
