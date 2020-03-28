@@ -14,8 +14,9 @@
           <div class="row" *ngIf="!!movie">
             <div class="col-md-12 col-xs-12">
               <i class="fa fa-arrow-left pointer" (click)="goback()" style="font-size: 40px; color: #e02041"></i>
-              <i style="font-size: 40px;" class="fa fa-star-o pull-right pointer" [class.fa-star]="isActive"
-                [class.fa-star-o]="!isActive" (click)="favorite(movie)"></i>
+              <i style="font-size: 40px;" class="fa pull-right pointer" 
+                [ngClass]="{'fa-star': isActive, 'fa-star-o': !isActive}"
+                (click)="favorite(movie)"></i>
             </div>
           </div>
 

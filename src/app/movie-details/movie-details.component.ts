@@ -4,8 +4,6 @@ import { MovieDetailsService } from './movie-details.service';
 import { SearchMoviesModel } from '../model/searchMovies';
 import { GeneralService } from '../services/general.service';
 import { StorageFacade } from '../core/persistence/storage.facade';
-import { MoviesModel } from '../model/movies';
-
 
 @Component({
   selector: 'app-movie-details',
@@ -15,6 +13,7 @@ import { MoviesModel } from '../model/movies';
 export class MovieDetailsComponent implements OnInit {
   public movie: SearchMoviesModel;
   private id_movie: number;
+  public isActive: boolean;
 
   constructor(
     private router: Router,
@@ -22,12 +21,13 @@ export class MovieDetailsComponent implements OnInit {
     private storage: StorageFacade,
     private _movieDetailsService: MovieDetailsService,
     private _service: GeneralService
-  ) {
-    this.id_movie = this.route.snapshot.params['id'];
+  ) {  }
+
+  ngOnInit() {
+    this.id_movie = Number(this.route.snapshot.params.id);
+    this.isActive = !!this.storage.usersStorage ? this.storage.usersStorage.favourites.some(active => active === this.id_movie) : false;
     this.getDetail(this.id_movie);
   }
-
-  ngOnInit() { }
 
 
   public getDetail(id: number) {
@@ -70,11 +70,10 @@ export class MovieDetailsComponent implements OnInit {
 
   private tratarSucesso(next: any): void {
     console.log(next);
-    // this.router.navigate(['/']);
+    this.isActive = !this.isActive;
   }
 
   private tratarErro(err: any): void {
-    console.log(err)
     alert('Você não está logado, faça login, e tente novamente.')
     // this.router.navigate(['login']);
   }
