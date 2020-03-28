@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  UsersStorage,
-  FavouritesStorage
+  UsersStorage
 } from '.';
 import { PersistenceEnum } from './model/persistence.enum';
 import { PersistenceService } from './services/persistence.service';
@@ -23,18 +22,6 @@ export class StorageFacade {
       this.persistenceService.salvar(PersistenceEnum.USER, usersStorage);
     } else {
       this.persistenceService.remover(PersistenceEnum.USER);
-    }
-  }
-
-  get favouritesStorage(): FavouritesStorage {
-    return this.persistenceService.deserializar(new FavouritesStorage());
-  }
-
-  set favouritesStorage(favouritesStorage: FavouritesStorage) {
-    if (favouritesStorage) {
-      this.persistenceService.salvar(PersistenceEnum.FAVOURITES, favouritesStorage);
-    } else {
-      this.persistenceService.remover(PersistenceEnum.FAVOURITES);
     }
   }
 }

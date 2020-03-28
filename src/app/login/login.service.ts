@@ -19,6 +19,5 @@ export class LoginService {
 
   public deslogar() {
     this.storage.usersStorage = null;
-    this.storage.favouritesStorage = null;
   }
 }

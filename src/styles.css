@@ -37,3 +37,18 @@ input, button {
     border-top-color: #000000;
     animation: spinner .8s linear infinite;
 }
+
+.carregamento {
+    height: 32px;
+    width: 32px;
+    display: block;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url('/assets/images/10.gif');
+    background-size: 32px 32px;
+    background-position: right center;
+    background-repeat: no-repeat;
+}

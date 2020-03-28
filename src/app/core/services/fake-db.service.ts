@@ -9,8 +9,7 @@ export class FakeDbService implements InMemoryDbService
     {
         return {
             // user
-            'user-users'  : UsersFakeDb.users,
-            'user-favourites'  : UsersFakeDb.favourites
+            'user-users'  : UsersFakeDb.users
         };
     }
 }

@@ -1,14 +1,7 @@
-import { PersistenceEnum } from './persistence.enum';
-import {Serializable} from './serializable';
-
-export class FavouritesStorage extends Serializable {
+export class FavouritesStorage  {
   constructor(
-    public lang?: string
+    public movie_id?: number[] 
   ) {
-    super();
-  }
 
-  public persistenceKey(): PersistenceEnum {
-    return PersistenceEnum.FAVOURITES;
   }
 }
