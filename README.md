@@ -31,5 +31,6 @@ The data of the users are located in database fake in `src/app/core/fake-db/user
 
 ## Development server
 Run `npm install` for install dependecy.
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
