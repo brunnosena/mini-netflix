@@ -3,7 +3,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Builder } from 'builder-pattern';
 import { StorageFacade } from '../core/persistence/storage.facade';
-import { UsersStorage, FavouritesStorage } from '../core/persistence';
+import { UsersStorage } from '../core/persistence';
 
 
 

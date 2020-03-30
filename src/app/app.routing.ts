@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 
 export const appRoutes = [
     { path: '', component: HomeComponent },
-    { path: 'favorites', component: FavouriteMoviesComponent },
+    { path: 'movies/:id/favourites', component: FavouriteMoviesComponent },
     { path: 'login', component: LoginComponent },
     { path: 'details/:id', component: MovieDetailsComponent },
     { path: '', redirectTo: '', pathMatch: 'full' },

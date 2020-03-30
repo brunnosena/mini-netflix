@@ -20,6 +20,15 @@ The data of the users are located in database fake in `src/app/core/fake-db/user
 - Login
 - Favourites
 
+## Users
+- Jack Smith
+    - User: e5f001
+    - Pass: 123
+
+- Paul Ryan
+    - User: ept001
+    - Pass: 456
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.

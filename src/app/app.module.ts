@@ -15,13 +15,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NotfoundComponent } from './not-found/not-found.component';
 import { HomeService } from './home/home.service';
 import { FavouriteMoviesComponent } from './favourite-movies/favourite-movies.component';
-import { SeriesComponent } from './series/series.component';
 import { FooterComponent } from './footer/footer.component';
 import { PersistenceService } from './core/persistence';
 import { StorageFacade } from './core/persistence/storage.facade';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { MovieDetailsService } from './movie-details/movie-details.service';
+import { FavouriteMoviesService } from './favourite-movies/favourite-movies.service';
 
 
 
@@ -33,7 +33,6 @@ import { MovieDetailsService } from './movie-details/movie-details.service';
     NavbarComponent,
     NotfoundComponent,
     FavouriteMoviesComponent,
-    SeriesComponent,
     FooterComponent,
     LoginComponent
   ],
@@ -54,6 +53,7 @@ import { MovieDetailsService } from './movie-details/movie-details.service';
     LoginService,
     MovieDetailsService,
     GeneralService,
+    FavouriteMoviesService,
     PersistenceService,
     StorageFacade
   ],

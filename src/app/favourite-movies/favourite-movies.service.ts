@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { SearchMoviesModel } from '../model/searchMovies';
+import { environment } from 'src/environments/environment';
 
-@Injectable()
-export class MovieDetailsService {
+@Injectable({
+  providedIn: 'root'
+})
+export class FavouriteMoviesService {
 
   constructor(
     private _httpClient: HttpClient
@@ -19,6 +21,4 @@ export class MovieDetailsService {
 
     return this._httpClient.get<SearchMoviesModel>(`${environment.urlAPI}/movie/${movie_id}`, { params: param });
   }
-
-
 }

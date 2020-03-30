@@ -20,7 +20,7 @@
           <span class="user">{{user.name}}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/favoritemovies']">Favourites</a>
+          <a class="dropdown-item" [routerLink]="['/movies', this.user.id, 'favourites']">Favourites</a>
           <a class="dropdown-item" (click)="logoff()">Sair</a>
         </div>
       </li>
