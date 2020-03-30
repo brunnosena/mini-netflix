@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row" style="padding: 24px 0;">
+        <div class="col-md-12">
+            <h3 *ngIf="user?.favourites.length === 0" style="text-align: center; color: whitesmoke;">
+                No Favourite Movies Available Yet
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label style="color: #FFF" for="exampleFormControlSelect1">Choose a country</label>
+                <select class="form-control" id="exampleFormControlSelect1" (change)="selectCountry($event)">
+                    <option value="US" selected>United State of America</option>
+                    <option value="JM">Jamaica</option>
+                    <option value="KP">Korean</option>
+                    <option value="BR">Brazil</option>                   
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12 mt-1 text-center" *ngIf="movies.length === 0">
+                    <span class="carregamento"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-3 col-xs-1 mt-1" *ngFor="let movie of movies"
+                    (click)="onSelect(movie)">
+                    <div class="card-movie pointer">
+                        <img src="{{movie.poster_path ? 'https://image.tmdb.org/t/p/w500'+movie.poster_path : 'assets/images/not-found.jpeg'}}"
+                            onerror="tratarImagemItem(this)" alt="movie.title">
+                        <div class="infor">
+                            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                            <p class="descricao">{{movie.title}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

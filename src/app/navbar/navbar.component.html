@@ -8,6 +8,20 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
 
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/home']" routerLinkActiveOptions="{exact: true}">Now Playing <span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/top-rated-movies']">Top Rated Movies <span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/most-movies']">Most Popular <span class="sr-only"></span></a>
+      </li>
+    </ul>
+
     <ul class="navbar-nav ml-auto">
       <li class="nav-item " *ngIf="!user">
         <a class="nav-link" [routerLink]="['/login']">Fazer login <span class="sr-only"></span></a>

@@ -8,6 +8,7 @@ export class UsersStorage extends Serializable {
     public pass?: string,
     public name?: string,
     public avatar?: string,
+    public session_id?: string,
     public favourites?: number[]
   ) {
     super();

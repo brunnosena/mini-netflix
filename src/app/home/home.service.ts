@@ -14,12 +14,12 @@ export class HomeService {
   ) { }
 
 
-  public getPopularMovies(): Observable<MoviesModel[]> {
+  public getNowPlaying(): Observable<MoviesModel[]> {
     let param = new HttpParams();
     param = param.append('api_key', environment.api_key);
     param = param.append('page', '1');
 
-    return this._httpClient.get<MoviesModel[]>(`${environment.urlAPI}/movie/popular`, { params: param });
+    return this._httpClient.get<MoviesModel[]>(`${environment.urlAPI}/movie/now_playing`, { params: param });
   }
 
 

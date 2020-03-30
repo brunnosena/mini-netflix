@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   public getPopularMovies() {
-    this._homeService.getPopularMovies()
+    this._homeService.getNowPlaying()
       .subscribe(
         next => this.successPopularMovies(next),
         err => this.errPopularMovies(err),

@@ -16,7 +16,7 @@
               <i class="fa fa-arrow-left pointer" (click)="goback()" style="font-size: 40px; color: #e02041"></i>
             </div>
             <div class="col-md-4 text-center">
-              <i *ngIf="!!movie?.videos.results.length > 0" class="fa fa-youtube-play pointer"
+              <i *ngIf="!!user && !!movie?.videos.results.length > 0" class="fa fa-youtube-play pointer"
                 (click)="playVideo(movie)" style="font-size: 40px; color: #e02041"></i>
             </div>
             <div class="col-md-4">

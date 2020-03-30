@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _loginService: LoginService,
     private storage: StorageFacade
-    ) { }
+  ) { }
 
   ngOnInit() {
     this._loginService.deslogar();
@@ -41,12 +41,11 @@ export class LoginComponent implements OnInit {
     const pass = this.loginForm.get('password').value;
 
     this._loginService.login(user, pass)
-            .subscribe(
-                next => this.tratarSucesso(next),
-                err => this.tratarErro(err)
-            );
+      .subscribe(
+        next => this.tratarSucesso(next),
+        err => this.tratarErro(err)
+      );
   }
-
 
   private tratarSucesso(next: any): void {
     if (next.length === 0) {
@@ -65,7 +64,7 @@ export class LoginComponent implements OnInit {
     this.showError = true;
   }
 
-  
+
 
 
 }

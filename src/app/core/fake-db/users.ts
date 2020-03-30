@@ -6,7 +6,9 @@ export class UsersFakeDb {
             'pass': '123',
             'name': 'Jack Smith',
             'avatar': '/assets/images/user1.png',
-            'favourites': []
+            'session_id': '4030cad459ade747ed5fdd53164788ac509cc1be',
+            'favourites': [],
+
         },
         {
             'id': '154588a0864d2881124',
@@ -14,7 +16,8 @@ export class UsersFakeDb {
             'pass': '456',
             'name': 'Paul Ryan',
             'avatar': '/assets/images/user2.png',
-            'favourites': []
+            'session_id': '2f3029a4cc7a74ad07a0393e6ed3ba652f82d508',
+            'favourites': [],
         }
     ];
 }

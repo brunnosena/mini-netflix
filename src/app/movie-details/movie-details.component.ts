@@ -7,6 +7,7 @@ import { GeneralService } from '../services/general.service';
 import { StorageFacade } from '../core/persistence/storage.facade';
 import { ModalResult } from '../model/modalResult';
 import { ModalAction } from '../model/modalAction';
+import { UsersStorage } from '../core/persistence';
 
 @Component({
   selector: 'app-movie-details',
@@ -16,14 +17,14 @@ import { ModalAction } from '../model/modalAction';
 export class MovieDetailsComponent implements OnInit {
   @Output('closed') closeEmitter: EventEmitter<ModalResult> = new EventEmitter<ModalResult>();
 
+  public user: UsersStorage;
   public movie: SearchMoviesModel;
-  private id_movie: number;
+  private idMovie: number;
   public isActive: boolean;
   public showModal: boolean;
 
   public frame: SafeUrl;
 
-  // player: YT.Player;
   public movie_video = {
     description: null,
     key: null
@@ -36,13 +37,14 @@ export class MovieDetailsComponent implements OnInit {
     private storage: StorageFacade,
     private _movieDetailsService: MovieDetailsService,
     private _service: GeneralService
-  ) { 
-    this.id_movie = Number(this.route.snapshot.params.id);
-    this.getDetail(this.id_movie);
+  ) {
+    this.idMovie = Number(this.route.snapshot.params.id);
+    this.getDetail(this.idMovie);
   }
 
   ngOnInit() {
-    this.isActive = !!this.storage.usersStorage ? this.storage.usersStorage.favourites.some(active => active === this.id_movie) : false;   
+    this.user = this.storage.usersStorage;
+    this.isActive = !!this.storage.usersStorage ? this.storage.usersStorage.favourites.some(active => active === this.idMovie) : false;   
   }
 
 
