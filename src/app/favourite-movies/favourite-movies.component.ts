@@ -20,12 +20,12 @@ export class FavouriteMoviesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.storage) this.router.navigate(['login']);
+    if (!this.storage) this.router.navigate(['/login']);
     this.user = this.storage.usersStorage;
     this.getFavourites(this.user.favourites);
   }
 
-  getFavourites(fav) {
+  getFavourites(fav: any) {
 
     if (fav.length > 0) {
       fav.map(f => {

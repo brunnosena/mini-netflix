@@ -31,6 +31,6 @@ export class NavbarComponent implements OnInit {
   public logoff() {
     this._loginService.deslogar();
     this.load();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }

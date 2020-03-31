@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Builder } from 'builder-pattern';
 import { StorageFacade } from '../core/persistence/storage.facade';
 import { UsersStorage } from '../core/persistence';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -11,10 +13,27 @@ import { UsersStorage } from '../core/persistence';
 export class GeneralService {
 
   constructor(
-    private storage: StorageFacade
+    private _httpClient: HttpClient,
+    private storage: StorageFacade,
 
-  ) {
+  ) { }
 
+  setFavor(sessionId: string, movieId: number): Observable<any> {
+
+    const body = JSON.stringify({
+      media_type: 'movie',
+      media_id: movieId,
+      favorite: true
+    });
+
+    const header = new HttpHeaders()
+        .set('Content-Type', 'application/json');
+
+    let param = new HttpParams();
+    param = param.append('api_key', environment.api_key);
+    param = param.append('session_id', sessionId);
+
+    return this._httpClient.post<any>(`${environment.urlAPI}/account/9172698/favorite/`, body, { params: param, headers: header });
   }
 
 
@@ -31,6 +50,13 @@ export class GeneralService {
       favourites = favourites.filter(f => f !== movie.id);
     } else {
       favourites.push(movie.id);
+      // this.setFavor(user.session_id, movie.id)
+      // .pipe(
+      //   switchMap(val => (val ? favourites.push(movie.id) : val))
+      // ).subscribe(
+      //   res => {},
+      //   err => throwError(err)
+      // );
     }
 
     const params: UsersStorage = Builder<UsersStorage>()
@@ -40,6 +66,8 @@ export class GeneralService {
       .name(user.name)
       .avatar(user.avatar)
       .favourites(favourites)
+      .session_id(user.session_id)
+      .guest_session(user.guest_session)
       .build();
 
     this.storage.usersStorage = params;

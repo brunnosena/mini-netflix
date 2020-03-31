@@ -8,7 +8,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
 
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" *ngIf="user">
       <li class="nav-item ">
         <a class="nav-link" routerLinkActive="active" [routerLink]="['/home']" routerLinkActiveOptions="{exact: true}">Now Playing <span class="sr-only"></span></a>
       </li>
@@ -20,12 +20,13 @@
       <li class="nav-item ">
         <a class="nav-link" routerLinkActive="active" [routerLink]="['/most-movies']">Most Popular <span class="sr-only"></span></a>
       </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/my-list', user?.session_id]">My list <span class="sr-only"></span></a>
+      </li>
     </ul>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item " *ngIf="!user">
-        <a class="nav-link" [routerLink]="['/login']">Fazer login <span class="sr-only"></span></a>
-      </li>
+    <ul class="navbar-nav ml-auto">    
 
       <li class="nav-item dropdown dropdown-menu-right pointer" *ngIf="user">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -33,9 +34,8 @@
           <img class="avatar" [src]="user.avatar" width="32">
           <span class="user">{{user.name}}</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/movies', this.user.id, 'favourites']">Favourites</a>
-          <a class="dropdown-item" (click)="logoff()">Sair</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+          <a class="dropdown-item" (click)="logoff()">Change User</a>
         </div>
       </li>
     </ul>

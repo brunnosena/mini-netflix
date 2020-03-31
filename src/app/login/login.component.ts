@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Builder } from 'builder-pattern';
 import { LoginService } from './login.service';
 import { StorageFacade } from '../core/persistence/storage.facade';
+import { UsersStorage } from '../core/persistence';
 
 
 @Component({
@@ -11,57 +12,52 @@ import { StorageFacade } from '../core/persistence/storage.facade';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
-  public showError: boolean = false;
-  public showAlert: boolean = false;
-  public loading: boolean = false;
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
     private _loginService: LoginService,
     private storage: StorageFacade
   ) { }
 
   ngOnInit() {
     this._loginService.deslogar();
-
-    this.loginForm = this.formBuilder.group({
-      user: ['', Validators.required],
-      password: ['', Validators.required]
-    });
   }
 
-  public login(): void {
-    this.loading = true;
-    this.showError = false;
-    this.showAlert = false;
+  public login(user: number): void {
 
-    const user = this.loginForm.get('user').value;
-    const pass = this.loginForm.get('password').value;
-
-    this._loginService.login(user, pass)
+    this._loginService.login()
       .subscribe(
-        next => this.tratarSucesso(next),
+        next => this.tratarSucesso(next, user),
         err => this.tratarErro(err)
       );
   }
 
-  private tratarSucesso(next: any): void {
-    if (next.length === 0) {
-      this.loading = false;
-      this.showAlert = true;
-      return;
-    }
+  public tratarSucesso(next: any, position: number): void {
+    const params: UsersStorage = Builder<UsersStorage>()
+      .id(next[1][position].id)
+      .user(next[1][position].user)
+      .pass(next[1][position].pass)
+      .name(next[1][position].name)
+      .avatar(next[1][position].avatar)
+      .favourites(this.tratarFavourites(next[1][position].favourites))
+      .session_id(next[1][position].session_id)
+      .guest_session(next[0].guest_session_id)
+      .build();
 
-    this.storage.usersStorage = next.pop();
-    this.loading = false;
+    this.storage.usersStorage = params;
+
     this.router.navigate(['/']);
   }
 
-  private tratarErro(err: any): void {
-    this.loading = false;
-    this.showError = true;
+
+  private tratarFavourites(favourites: any) {
+    return !!favourites  && favourites.results.length > 0
+      ? favourites.results.map(fav => fav.id)
+      : [];
+  }
+
+  public tratarErro(err: any): void {
+    console.log(err);
   }
 
 

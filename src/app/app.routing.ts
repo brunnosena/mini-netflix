@@ -10,7 +10,7 @@ import { MostMoviesComponent } from './most-movies/most-movies.component';
 
 export const appRoutes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'movies/:id/favourites', component: FavouriteMoviesComponent, canActivate: [AuthGuard] },
+    { path: 'my-list/:id', component: FavouriteMoviesComponent, canActivate: [AuthGuard] },
     { path: 'top-rated-movies', component: TopRatedMoviesComponent, canActivate: [AuthGuard] },
     { path: 'most-movies', component: MostMoviesComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
