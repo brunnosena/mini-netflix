@@ -36,6 +36,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 `core` - Directory where dbfake, persistence, and storagefacade is located
 
+`storage facade` - A provide responsible for handling localStorage.
+
 `pages of navigation` - favourite-movies, home, login, most-movies, movie-details, not-found
 
 `services` - Each component directory, there is its own service
