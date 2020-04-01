@@ -15,10 +15,13 @@ Data Users:\
 The data of the users are located in database fake in `src/app/core/fake-db/users.ts`
 
 ## Routes
-- Home
-- Details Movie
-- Login
-- Favourites
+
+- home
+- my-list
+- top-rated-movies
+- most-movies
+- login
+- details/:id
 
 ## Users
 - Jack Smith
